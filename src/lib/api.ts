@@ -40,6 +40,18 @@ export async function addMenuSection(restaurantId: string, name: string) {
   return { data, error }
 }
 
+export async function updateMenuSection(sectionId: string, name: string) {
+  const { data, error } = await supabase
+    .from('menu_sections')
+    .update({ name })
+    .eq('id', sectionId)
+    .select()
+    .single();
+
+  return { data, error };
+}
+
+
 export async function deleteMenuSection(sectionId: string) {
   const { error } = await supabase
     .from('menu_sections')

@@ -1,27 +1,24 @@
-import { createServerClient } from "@/lib/supabase/server";
-import { MenuSection } from "@/types/supabase";
+// src/lib/supabase/queries/get-sections-with-items.ts
+import { createServerClient } from '@/lib/supabase/server'
 
-export async function getSectionsWithItems(): Promise<MenuSection[]> {
-  const supabase = createServerClient();
+export async function getSectionsWithItems(restaurantId: string) {
+  const supabase = createServerClient()
 
   const { data, error } = await supabase
-    .from("menu_sections")
-    .select(`
-      id,
-      title,
-      items (
-        id,
-        name,
-        price
-      )
-    `);
+    .from('menu_sections')
+    .select('*, menu_items(*)')
+    .eq('restaurant_id', restaurantId) // filter by restaurant_id
+    .order('order_column', { ascending: true }) // optional ordering
 
   if (error) {
-    console.error("Error fetching sections:", error.message);
-    return [];
+    throw error
   }
+// Convert Supabase format to match your MenuSection type
+  const sections = data.map((section) => ({
+    ...section,
+    title: section.name,           // map 'name' to 'title'
+    items: section.menu_items,     // map 'menu_items' to 'items'
+  }))
 
-  // Validate and return as MenuSection[]
-  return data as unknown as MenuSection[];
+  return sections
 }
-

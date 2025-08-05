@@ -20,6 +20,8 @@ export type MenuItem = {
 export type MenuSection = {
   id: string;
   title: string;
+ 
+
   items: MenuItem[];
 };
 

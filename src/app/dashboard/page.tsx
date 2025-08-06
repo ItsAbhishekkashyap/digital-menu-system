@@ -1,122 +1,127 @@
-// import ClientLayout from '@/components/ClientLayout';
-// import React from 'react';
-// import { getSectionsWithItems } from '@/lib/supabase/queries/get-sections-with-items';
-// import { MenuSection } from '@/types/supabase';
+'use client'
+
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { supabase } from '@/lib/supabase' 
+import { Button } from '@/components/ui/Button'
+import { Card, CardContent } from '@/components/ui/Card'
+import { Json } from '@/types/supabase'
 
 
 
 
-// export default async function Dashboard() {
-//   const sections: MenuSection[] = await getSectionsWithItems();
+interface Restaurant {
+  id: string
+  name: string
 
-//   return (
-//     <ClientLayout>
-//       <div className="min-h-screen flex flex-row bg-gray-100 dark:bg-gray-900">
-//         {/* Left Panel: Editor */}
-//         <div className="w-2/5 p-6 border-r border-gray-300 dark:border-gray-700 overflow-y-auto">
-//           <h1 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">
-//             🍽️ Menu Editor
-//           </h1>
+  owner_id: string | null;
+  created_at: string | null;
+  theme: Json | null;
+  logo_url: string | null;
+  subdomain?: string | null;
+  
+}
 
-//           {/* Sections List with Items */}
-//           <div className="mb-6 space-y-4">
-//             {sections.map((section) => (
-//               <div key={section.id}>
-//                 <h3 className="text-md font-semibold text-gray-700 dark:text-gray-300">
-//                   {section.title}
-//                 </h3>
-//                 <ul className="pl-4 list-disc text-sm text-gray-600 dark:text-gray-400">
-//                   {section.items.map((item) => (
-//                     <li key={item.id}>
-//                       {item.name} - ₹{item.price}
-//                     </li>
-//                   ))}
-//                 </ul>
-//               </div>
-//             ))}
-//           </div>
+export default function DashboardPage() {
 
-//           {/* Section List (Titles only) */}
-//           <div className="mb-6">
-//             <h2 className="text-lg font-bold mb-2 text-gray-800 dark:text-gray-200">📋 Section List</h2>
-//             <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 text-sm space-y-1">
-//               {sections.map((section) => (
-//                 <li key={`section-title-${section.id}`}>{section.title}</li>
-//               ))}
-//             </ul>
-//           </div>
+  const router = useRouter()
 
-//           {/* Add Section Button */}
-//           <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-//             + Add Section
-//           </button>
-//         </div>
+  const [restaurants, setRestaurants] = useState<Restaurant[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
 
-//         {/* Right Panel: Preview */}
-//         <div className="w-3/5 p-6 overflow-y-auto">
-//           <h1 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">
-//             🔍 Live Preview
-//           </h1>
-
-//           <div className="bg-white dark:bg-gray-800 shadow rounded p-6 space-y-6">
-//             {sections.length === 0 ? (
-//               <p className="text-gray-500 dark:text-gray-400">Nothing to show yet...</p>
-//             ) : (
-//               sections.map((section) => (
-//                 <div key={section.id}>
-//                   <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2">
-//                     {section.title}
-//                   </h2>
-//                   <ul className="space-y-2">
-//                     {section.items.map((item) => (
-//                       <li key={item.id} className="flex justify-between text-sm border-b pb-1 text-gray-700 dark:text-gray-300">
-//                         <span>{item.name}</span>
-//                         <span className="font-medium">₹{item.price}</span>
-//                       </li>
-//                     ))}
-//                   </ul>
-//                 </div>
-//               ))
-//             )}
-//           </div>
-//         </div>
-//       </div>
-//     </ClientLayout>
-//   );
-// }
+  async function fetchRestaurants() {
+    setLoading(true)
+    const { data, error } = await supabase
+      .from('restaurants')
+      .select('*')
+      .order('created_at', { ascending: false })
 
 
-import ClientLayout from '@/components/ClientLayout';
-import DashboardClient from '@/components/DashboardClient';
-import { getSectionsWithItems } from '@/lib/supabase/queries/get-sections-with-items';
-import { getRestaurantId } from '@/lib/supabase/queries/get-restaurant-id'; // Your own code
-import { MenuSection } from '@/types/supabase'; // Make sure this import exists
+    if (error) {
+      console.error('Error fetching restaurants:', error)
+    } else if (data) {
+      const typedData = data as Restaurant[]
 
-export default async function DashboardPage() {
-  const restaurantId = await getRestaurantId();
-  if (!restaurantId) {
-    return (
-      <ClientLayout>
-        <p>No restaurant found. Please create one first.</p>
-      </ClientLayout>
-    );
+const formattedData: Restaurant[] = typedData.map((item) => ({
+  id: item.id,
+  name: item.name,
+  logo_url: item.logo_url ?? null,
+  owner_id: item.owner_id ?? null,
+  theme: item.theme ?? null,
+  created_at: item.created_at ?? null,
+  subdomain: item.subdomain ?? null, // <- safe now
+}))
+
+
+
+      setRestaurants(formattedData)
+    }
+    setLoading(false)
   }
 
-  const sections = await getSectionsWithItems(restaurantId);
+  async function handleCreate() {
+    const { data: userData, error: userError } = await supabase.auth.getUser()
+    if (userError) {
+      console.error('Error fetching user:', userError)
+      return
+    }
 
-  // Map the fetched sections to the expected MenuSection type shape
-  const formattedSections: MenuSection[] = sections.map((section) => ({
-    id: section.id,
-    title: section.name, // 'name' from DB maps to 'title' expected in MenuSection
-    order: section.order,
-    created_at: section.created_at,
-    restaurant_id: section.restaurant_id,
-    items: section.menu_items, // ensure this matches your MenuSection items type
-  }));
+    const user = userData?.user
+    if (!user) {
+      alert('User not logged in')
+      return
+    }
+
+    const newRestaurant = {
+      name: 'New Restaurant',
+      owner_id: user.id,
+      subdomain: `restaurant-${Date.now()}`,
+    }
+
+    const { data, error } = await supabase
+      .from('restaurants')
+      .insert([newRestaurant])
+      .select()
+      .single()
+
+    if (error) {
+      console.error('Error creating restaurant:', error)
+    } else if (data) {
+      router.push(`/dashboard/${data.id}`)
+    }
+  }
+
+  useEffect(() => {
+    fetchRestaurants()
+  }, [])
 
   return (
-    <ClientLayout>
-      <DashboardClient initialSections={formattedSections} restaurantId={restaurantId} />
-    </ClientLayout>
-  );
+    <div className="p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-semibold">Your Restaurants</h1>
+        <Button onClick={handleCreate}>+ Create New</Button>
+      </div>
+
+      {loading ? (
+        <p>Loading...</p>
+      ) : restaurants.length === 0 ? (
+        <p className="text-muted-foreground">No restaurant found. Please create one first.</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {restaurants.map((restaurant) => (
+            <Card
+              key={restaurant.id}
+              onClick={() => router.push(`/dashboard/${restaurant.id}`)}
+              className="cursor-pointer hover:shadow-md transition"
+            >
+              <CardContent className="p-4">
+                <h2 className="text-lg font-bold">{restaurant.name}</h2>
+                <p className="text-sm text-muted-foreground">{restaurant.subdomain}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
+    </div>
+  )
 }

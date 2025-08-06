@@ -91,11 +91,12 @@
 // }
 
 
+// app/signup/page.tsx
 'use client'
 
 import { useState } from 'react'
-// import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
+import { useRouter } from 'next/navigation'
 
 export default function SignupPage() {
   const [email, setEmail] = useState('')
@@ -103,13 +104,13 @@ export default function SignupPage() {
   const [role, setRole] = useState<'admin' | 'restaurant_owner' | 'customer'>('customer')
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
-//   const router = useRouter()
+  const router = useRouter()
 
   const handleSignup = async () => {
     setLoading(true)
     setMessage('')
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -121,7 +122,7 @@ export default function SignupPage() {
     if (error) {
       setMessage(`Error: ${error.message}`)
     } else {
-      setMessage('Check your email to confirm your account.')
+      setMessage('✅ Check your email to confirm your account.')
     }
 
     setLoading(false)
@@ -170,6 +171,7 @@ export default function SignupPage() {
     </div>
   )
 }
+
 
 
 

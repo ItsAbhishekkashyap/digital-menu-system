@@ -84,20 +84,27 @@
 //   )
 // }
 
+// app/login/page.tsx
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import type { Database } from '@/types/supabase' // adjust this if needed
 
-export default function LoginPage() {
+const LoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
   const router = useRouter()
+  const supabase = createClientComponentClient<Database>()
 
   const handleLogin = async () => {
+    setLoading(true)
     setError('')
+
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -105,10 +112,19 @@ export default function LoginPage() {
 
     if (error) {
       setError(error.message)
-    } else {
-      const role = data.user?.user_metadata?.role || 'customer'
-      router.push(`/dashboard/${role}`) // redirect to dashboard based on role
+    } else if (data.user) {
+      const role = data.user.user_metadata?.role
+
+      if (role === 'restaurant_owner') {
+        router.push('/dashboard/restaurant_owner')
+      } else if (role === 'admin') {
+        router.push('/dashboard/admin')
+      } else {
+        router.push('/menu')
+      }
     }
+
+    setLoading(false)
   }
 
   return (
@@ -132,9 +148,10 @@ export default function LoginPage() {
         />
         <button
           onClick={handleLogin}
-          className="bg-blue-600 text-white px-4 py-2 rounded w-full"
+          disabled={loading}
+          className={`bg-blue-600 text-white px-4 py-2 rounded w-full ${loading ? 'opacity-50' : ''}`}
         >
-          Login
+          {loading ? 'Logging in...' : 'Login'}
         </button>
 
         {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
@@ -143,4 +160,4 @@ export default function LoginPage() {
   )
 }
 
-
+export default LoginPage

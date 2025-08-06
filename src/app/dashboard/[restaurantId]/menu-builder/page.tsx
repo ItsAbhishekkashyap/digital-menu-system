@@ -75,6 +75,15 @@ export default function MenuBuilder() {
 
   // Realtime subscription to menu_sections and menu_items
   useEffect(() => {
+
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      console.log('Current session:', session);
+    };
+    checkSession();
+
+
+
     fetchMenu()
 
     const sectionSubscription = supabase
@@ -436,3 +445,5 @@ export default function MenuBuilder() {
     </div>
   )
 }
+
+

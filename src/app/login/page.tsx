@@ -116,7 +116,7 @@ const LoginPage = () => {
       const role = data.user.user_metadata?.role
 
       if (role === 'restaurant_owner') {
-        router.push('/dashboard/restaurant_owner')
+        router.push('/dashboard/restaurant')
       } else if (role === 'admin') {
         router.push('/dashboard/admin')
       } else {

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase' 
+import { supabase } from '@/lib/supabase/client' 
 import { Button } from '@/components/ui/Button'
 import { Card, CardContent } from '@/components/ui/Card'
 import { Json } from '@/types/supabase'
@@ -111,7 +111,7 @@ const formattedData: Restaurant[] = typedData.map((item) => ({
           {restaurants.map((restaurant) => (
             <Card
               key={restaurant.id}
-              onClick={() => router.push(`/dashboard/${restaurant.id}`)}
+              onClick={() => router.push(`/dashboard/${restaurant.id}/menu-builder`)}
               className="cursor-pointer hover:shadow-md transition"
             >
               <CardContent className="p-4">

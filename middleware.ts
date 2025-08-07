@@ -1,32 +1,27 @@
-// middleware.ts
+// src/middleware.ts
+
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs';
+import type { Database } from '@/types/supabase'; // Make sure this path is correct
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
 
-  const supabase = createMiddlewareClient({ req, res });
+  // Create a Supabase client configured to use cookies
+  const supabase = createMiddlewareClient<Database>({ req, res });
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  const pathname = req.nextUrl.pathname;
-
-  const isProtectedRoute = pathname.startsWith('/dashboard');
-
-  if (isProtectedRoute && !session) {
-    const loginUrl = new URL('/login', req.url);
-    loginUrl.searchParams.set('redirectedFrom', pathname);
-    return NextResponse.redirect(loginUrl);
-  }
+  // This line is crucial. It refreshes the session cookie on every request,
+  // so your server components (like layouts) can read it.
+  await supabase.auth.getSession();
 
   return res;
 }
 
+// This config ensures the middleware runs on all paths except for static assets.
 export const config = {
-  matcher: ['/dashboard/:path*'],
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico).*)',
+  ],
 };
-
 

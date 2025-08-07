@@ -87,7 +87,7 @@ const formattedData: Restaurant[] = typedData.map((item) => ({
     if (error) {
       console.error('Error creating restaurant:', error)
     } else if (data) {
-      router.push(`/dashboard/${data.id}`)
+      router.push(`/dashboard/restaurant/new`)
     }
   }
 

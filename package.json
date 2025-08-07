@@ -10,6 +10,7 @@
     "types:gen": "supabase gen types typescript --project-id qdlqmvwhyceraxndxuiy > src/types/supabase.ts"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@hello-pangea/dnd": "^18.0.1",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-label": "^2.1.7",
@@ -22,6 +23,7 @@
     "axios": "^1.11.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "gsap": "^3.13.0",
     "lucide-react": "^0.536.0",
     "next": "15.4.5",
     "react": "19.1.0",

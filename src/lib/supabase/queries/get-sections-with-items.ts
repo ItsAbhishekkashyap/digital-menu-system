@@ -1,8 +1,8 @@
 // src/lib/supabase/queries/get-sections-with-items.ts
-import { createServerClient } from '@/lib/supabase/server'
+import { createSupabaseServerClient } from '@/lib/supabase/server'
 
 export async function getSectionsWithItems(restaurantId: string) {
-  const supabase = createServerClient()
+  const supabase = createSupabaseServerClient()
 
   const { data, error } = await supabase
     .from('menu_sections')

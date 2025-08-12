@@ -118,9 +118,9 @@ const DashboardHeader = ({ user, onCreate }: { user: User | null; onCreate: () =
                     <DropdownMenuContent className="bg-gray-800 border-gray-700 text-white w-56">
                         <DropdownMenuLabel className="text-gray-400">{user?.email}</DropdownMenuLabel>
                         <DropdownMenuSeparator className="bg-gray-700"/>
-                        <DropdownMenuItem onClick={() => router.push('/dashboard/settings')} className="cursor-pointer focus:bg-gray-700">
+                        <DropdownMenuItem onClick={() => router.push('/dashboard/settings')} className="cursor-pointer  focus:bg-gray-700">
                             <Settings className="mr-2 h-4 w-4" />
-                            <span>Account Settings</span>
+                            <span className='hover:text-background'>Account Settings</span>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator className="bg-gray-700"/>
                         <DropdownMenuItem onClick={handleLogout} className="cursor-pointer focus:bg-red-500/20 focus:text-red-400">

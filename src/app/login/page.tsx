@@ -107,6 +107,8 @@ const LoaderIcon = ({ className }: { className?: string }) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
 );
 
+
+
 export default function LoginPage() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -167,7 +169,9 @@ export default function LoginPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
                 <div className="relative flex flex-col justify-end h-full p-12 text-white">
-                    <Link href="/" className="text-3xl font-bold">Menu<span className="text-orange-500">.</span></Link>
+                    <Link href="/" className="text-2xl font-bold text-white">
+                  <span className="text-orange-500 mr-1">✦</span>Menu<span className=" text-orange-500">Luxe</span>
+                </Link>
                     <p className="mt-4 text-lg text-gray-300">The simplest way to bring your restaurant&#39;s menu into the digital age.</p>
                 </div>
             </div>

@@ -218,7 +218,7 @@ export default function SignupPage() {
                                     name="role"
                                     value={role}
                                     onChange={(e) => setRole(e.target.value as 'restaurant_owner' | 'customer')}
-                                    className="appearance-none rounded-md relative block w-full px-3 py-3 pl-12 border border-gray-700 bg-gray-800 text-gray-200 focus:outline-none focus:ring-orange-500 focus:border-orange-500 focus:z-10 sm:text-sm"
+                                    className=" rounded-md relative block w-full px-3 py-3 pl-12 border border-gray-700 bg-gray-800 text-gray-200 focus:outline-none focus:ring-orange-500 focus:border-orange-500 focus:z-10 sm:text-sm"
                                 >
                                     <option value="restaurant_owner">I am a Restaurant Owner</option>
                                     <option value="customer">I am a Customer</option>
@@ -261,7 +261,7 @@ export default function SignupPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
                 <div className="relative flex flex-col justify-end h-full p-12 text-white">
-                    <Link href="/" className="text-3xl font-bold">Menu<span className="text-orange-500">.</span></Link>
+                    <Link href="/" className="text-3xl font-bold"><span className="text-orange-500 mr-1">✦</span>Menu<span className=" text-orange-500">Luxe</span></Link>
                     <p className="mt-4 text-lg text-gray-300">Join a community of modern restaurants. Go digital in minutes, not weeks.</p>
                 </div>
             </div>

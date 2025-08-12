@@ -65,6 +65,36 @@ export type Database = {
           },
         ]
       }
+      menu_item_tags: {
+        Row: {
+          menu_item_id: string
+          tag_id: string
+        }
+        Insert: {
+          menu_item_id: string
+          tag_id: string
+        }
+        Update: {
+          menu_item_id?: string
+          tag_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "menu_item_tags_menu_item_id_fkey"
+            columns: ["menu_item_id"]
+            isOneToOne: false
+            referencedRelation: "menu_items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "menu_item_tags_tag_id_fkey"
+            columns: ["tag_id"]
+            isOneToOne: false
+            referencedRelation: "tags"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       menu_items: {
         Row: {
           created_at: string | null
@@ -209,12 +239,44 @@ export type Database = {
           },
         ]
       }
+      tags: {
+        Row: {
+          color: string
+          id: string
+          name: string
+          restaurant_id: string
+        }
+        Insert: {
+          color?: string
+          id?: string
+          name: string
+          restaurant_id: string
+        }
+        Update: {
+          color?: string
+          id?: string
+          name?: string
+          restaurant_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tags_restaurant_id_fkey"
+            columns: ["restaurant_id"]
+            isOneToOne: false
+            referencedRelation: "restaurants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_restaurant_owner: {
+        Args: { restaurant_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

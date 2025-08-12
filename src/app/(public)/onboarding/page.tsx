@@ -4,6 +4,67 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { gsap } from 'gsap';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import type { Session } from '@supabase/auth-helpers-nextjs';
+import { useRouter } from 'next/navigation';
+
+
+
+// --- NEW AUTHENTICATION COMPONENT ---
+const AuthButtons = () => {
+  const [session, setSession] = useState<Session | null>(null);
+  const router = useRouter();
+  const supabase = createClientComponentClient();
+
+  useEffect(() => {
+    const getSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      setSession(data.session);
+    };
+    getSession();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => {
+      authListener?.subscription.unsubscribe();
+    };
+  }, [supabase.auth]);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.push('/'); // Redirect to home after sign out
+  };
+
+  if (session) {
+    return (
+      <div className="flex items-center space-x-4">
+        <Link href="/dashboard" className="text-sm font-medium text-gray-300 hover:text-white transition px-4 py-2 rounded-full hover:bg-white/10">
+          Dashboard
+        </Link>
+        <button
+          onClick={handleSignOut}
+          className="text-sm font-medium cta-button text-white px-5 py-2 rounded-full transition"
+        >
+          Sign Out
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-center space-x-4">
+      <Link href="/login" className="text-sm font-medium text-gray-300 hover:text-white transition hidden sm:block px-4 py-2 rounded-full hover:bg-white/10">
+        Sign In
+      </Link>
+      <Link href="/signup" className="text-sm font-medium cta-button text-white px-5 py-2 rounded-full transition">
+        Get Started
+      </Link>
+    </div>
+  );
+};
+
 
 // --- SVG ICONS ---
 const UserIcon = () => (
@@ -192,18 +253,14 @@ export default function OnboardingPage() {
       <div className="bg-gray-950 text-gray-200 antialiased min-h-screen">
         {/* Header */}
         <header className="fixed top-0 left-0 right-0 z-50 glass-effect">
-          <div className="container mx-auto px-6 py-3 flex justify-between items-center">
+           <div className="container mx-auto px-6 py-3 flex justify-between items-center">
             <Link href="/" className="text-2xl font-bold text-white flex items-center">
               <span className="text-orange-500 mr-1">✦</span>Menu<span className="gradient-text">Luxe</span>
             </Link>
-            <div className="flex items-center space-x-4">
-              <Link href="/login" className="text-sm font-medium text-gray-300 hover:text-white transition hidden sm:block px-4 py-2 rounded-full hover:bg-white/10">
-                Sign In
-              </Link>
-              <Link href="/signup" className="text-sm font-medium cta-button text-white px-5 py-2 rounded-full transition">
-                Get Started
-              </Link>
-            </div>
+            
+            {/* ===== UPDATED: DYNAMIC AUTH BUTTONS ===== */}
+            <AuthButtons />
+
           </div>
         </header>
 

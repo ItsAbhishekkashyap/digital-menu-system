@@ -19,9 +19,10 @@ export default function AddSectionForm({ restaurantId }: AddSectionFormProps) {
 
     setLoading(true);
 
+    // ✅ FIX: Changed 'title' to 'name' to match your database schema
     const { error } = await supabase.from('menu_sections').insert([
       {
-        title,
+        name: title, // This is the corrected line
         restaurant_id: restaurantId,
       },
     ]);

@@ -101,7 +101,7 @@ const DashboardHeader = ({ user, onCreate }: { user: User | null; onCreate: () =
     }
 
     return (
-        <header className="flex justify-between items-center mb-8">
+        <header className="flex justify-between gap-4 items-center mb-8">
             <div>
                 <Link href="/" className="text-2xl font-bold text-white flex items-center">
                     <span className="text-orange-500 mr-1">✦</span>Menu<span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-red-500">Luxe</span>

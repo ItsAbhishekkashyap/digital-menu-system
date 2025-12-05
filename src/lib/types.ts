@@ -1,4 +1,3 @@
-// types.ts or inside api.ts if small project
 export interface MenuItemInput {
   name: string
   description?: string

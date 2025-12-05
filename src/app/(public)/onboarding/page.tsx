@@ -45,7 +45,7 @@ const AuthButtons = () => {
         </Link>
         <button
           onClick={handleSignOut}
-          className="text-sm font-medium cta-button text-white px-5 py-2 rounded-full transition"
+          className="text-sm font-medium cta-button text-white px-2 py-2 rounded-full transition"
         >
           Sign Out
         </button>

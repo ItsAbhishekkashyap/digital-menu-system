@@ -8,8 +8,8 @@ import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Star, Menu as MenuIcon, X, ArrowUp } from 'lucide-react';
-import { cn } from '@/lib/utils'; // Assuming you have this utility file in your project
-import { Database } from '@/types/supabase'; // Assuming you have this types file
+import { cn } from '@/lib/utils'; 
+import { Database } from '@/types/supabase'; 
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,7 +25,6 @@ interface Restaurant {
   id: string; name: string; description: string | null; logo_url: string | null;
   theme: Theme; menu_sections: MenuSection[];
 }
-
 // --- CONSTANTS ---
 const DEFAULT_THEME: Theme = { preset: 'dark', brandColor: '#FBBF24' };
 
@@ -51,13 +50,13 @@ const formatCurrency = (price: number) => new Intl.NumberFormat('en-IN', {
   currency: 'INR'
 }).format(price);
 
-// --- REFACTORED SUB-COMPONENTS ---
+
 
 const HeroSection = ({ name, description, accentColor, logo_url }: { name: string, description: string | null, accentColor: string, logo_url: string | null }) => (
   <header className="relative h-[90vh] overflow-hidden text-white">
     <div className="absolute inset-0 bg-black/40 z-10" />
     <Image
-      src="/universal2.png" // Make sure this path is correct
+      src="/universal2.png" 
       alt={`${name} interior`}
       fill
       className="object-cover opacity-30"
@@ -164,10 +163,8 @@ const MobileNavDrawer = ({ isOpen, onClose, sections, activeSection, brandColor,
   </div>
 );
 
-/**
- * Menu Item Card Component
- * DESIGN UPDATE: Redesigned for a more modern and presentable look.
- */
+
+
 const MenuItemCard = ({ item, theme, accentColor }: { item: MenuItem; theme: Theme; accentColor: string; }) => {
   const { preset } = theme;
 
@@ -215,7 +212,7 @@ const MenuItemCard = ({ item, theme, accentColor }: { item: MenuItem; theme: The
           </h3>
           <p
             className="text-md font-semibold transition-colors whitespace-nowrap"
-            // style={{ color: accentColor }}
+           
           >
             {formatCurrency(item.price)}
           </p>
@@ -249,7 +246,7 @@ const MenuItemCard = ({ item, theme, accentColor }: { item: MenuItem; theme: The
 };
 
 
-// --- MAIN PAGE COMPONENT ---
+
 export default function RestaurantMenu() {
   const params = useParams();
   const slug = params.slug as string;
@@ -260,7 +257,7 @@ export default function RestaurantMenu() {
   const supabase = createClientComponentClient<Database>();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Fetch restaurant data
+ 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -309,7 +306,7 @@ export default function RestaurantMenu() {
     fetchData();
   }, [slug, supabase]);
 
-  // GSAP Animations
+  
   useGSAP(() => {
     if (!restaurant || loading) return;
 

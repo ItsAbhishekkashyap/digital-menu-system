@@ -1,4 +1,3 @@
-// src/components/menu/MenuBuilderClient.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -9,7 +8,7 @@ import {
   type DropResult,
 } from '@hello-pangea/dnd';
 
-// We will pass all the types, data, and functions from the main page as props
+//  passing all the types, data, and functions from the main page as props
 interface MenuItem {
   id: string;
   section_id: string | null;
@@ -34,7 +33,7 @@ interface MenuSection {
 interface MenuBuilderClientProps {
   sections: MenuSection[];
   onDragEnd: (result: DropResult) => void;
-  // We pass the JSX for the sections and items as a function
+  // passing the JSX for the sections and items as a function
   renderSection: (section: MenuSection, index: number) => React.ReactNode;
 }
 
@@ -45,8 +44,7 @@ export default function MenuBuilderClient({
 }: MenuBuilderClientProps) {
   const [isMounted, setIsMounted] = useState(false);
 
-  // This hook ensures the component only renders on the client, after mounting.
-  // This is the key to fixing both errors.
+ 
   useEffect(() => {
     setIsMounted(true);
   }, []);

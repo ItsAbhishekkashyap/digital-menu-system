@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Your App Name',
-  description: 'Your app description here',
+  title: 'MenuLuxe - Digital Menu System',
+  description: 'Elevate your dining experience with MenuLuxe, the ultimate digital menu system for restaurants. Seamlessly browse, customize, and order from our interactive menus, designed to enhance customer satisfaction and streamline restaurant operations.',
 };
 
 export default function RootLayout({

@@ -107,7 +107,7 @@ const DashboardHeader = ({ user, onCreate }: { user: User | null; onCreate: () =
                     <span className="text-orange-500 mr-1">✦</span>Menu<span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-red-500">Luxe</span>
                 </Link>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center gap-2">
                 <Button onClick={onCreate} className="bg-orange-600 hover:bg-orange-700 text-white font-semibold">
                     <Plus className="mr-2 h-4 w-4" /> Create New
                 </Button>

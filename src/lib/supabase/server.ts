@@ -3,10 +3,10 @@ import { cookies } from 'next/headers';
 import type { Database } from '@/types/supabase';
 
 export const createSupabaseServerClient = async () => {
-  // Next.js 15 mein cookies ek Promise hai, isliye await zaroori hai
   const cookieStore = await cookies();
 
-  // @ts-expect-error: Suppressing type mismatch because library expects Promise but runtime needs object
+  // 👇 Maine wo '@ts-expect-error' wali line hata di hai.
+  // Ab code clean hai aur Vercel khushi-khushi deploy karega.
   return createServerComponentClient<Database>({
     cookies: () => cookieStore,
   });

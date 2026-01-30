@@ -6,7 +6,7 @@ export const createSupabaseServerClient = async () => {
   // Next.js 15 mein cookies ek Promise hai, isliye await zaroori hai
   const cookieStore = await cookies();
 
-  //@ts-expect-error: Suppressing type mismatch because library expects Promise but runtime needs object
+  // @ts-expect-error: Suppressing type mismatch because library expects Promise but runtime needs object
   return createServerComponentClient<Database>({
     cookies: () => cookieStore,
   });

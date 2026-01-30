@@ -15,8 +15,8 @@ export async function getSectionsWithItems(restaurantId: string) {
       *,
       menu_items (*)
     `)
-    // 👇 SIMPLE FIX: Ye comment TypeScript ko bolta hai "Is line ka error ignore karo"
-    // @ts-expect-error: Type mismatch due to Supabase complexity, but string is valid here.
+    
+    
     .eq('restaurant_id', restaurantId)
     .order('order_column', { ascending: true });
 

@@ -266,7 +266,7 @@ export default function RestaurantSettingsPage() {
         `}</style>
         <main className="container mx-auto p-6 md:p-8 lg:p-10 relative z-10">
             <div className="mb-8">
-                <Button variant="outline" onClick={() => router.push('/dashboard')} className="bg-transparent border-gray-700 hover:bg-gray-800/50"><ArrowLeft className="mr-2 h-4 w-4" />Back to Dashboard</Button>
+                <Button variant="outline" onClick={() => router.push('/dashboard')} className="bg-transparent hover:text-white border-gray-700 hover:bg-gray-800/50"><ArrowLeft className="mr-2 h-4 w-4" />Back to Dashboard</Button>
             </div>
             <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-10">

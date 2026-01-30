@@ -1,4 +1,3 @@
-// src/lib/supabase/queries/get-sections-with-items.ts
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 
 export async function getSectionsWithItems(restaurantId: string) {
@@ -13,7 +12,7 @@ export async function getSectionsWithItems(restaurantId: string) {
   if (error) {
     throw error
   }
-// Convert Supabase format to match your MenuSection type
+// Convert Supabase format to match the MenuSection type
   const sections = data.map((section) => ({
     ...section,
     title: section.name,           // map 'name' to 'title'

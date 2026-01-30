@@ -45,10 +45,16 @@ function parseTheme(dbTheme: unknown): Theme {
   return DEFAULT_THEME;
 }
 
-const formatCurrency = (price: number) => new Intl.NumberFormat('en-IN', {
-  style: 'currency',
-  currency: 'INR'
-}).format(price);
+const formatCurrency = (price: number, symbol: string = '₹') => {
+  // Agar symbol '$' hai to US format, warna Indian format
+  const locale = symbol === '$' ? 'en-US' : 'en-IN';
+  const currencyCode = symbol === '$' ? 'USD' : 'INR';
+
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: currencyCode
+  }).format(price);
+};
 
 
 
@@ -167,6 +173,7 @@ const MobileNavDrawer = ({ isOpen, onClose, sections, activeSection, brandColor,
 
 const MenuItemCard = ({ item, theme, accentColor }: { item: MenuItem; theme: Theme; accentColor: string; }) => {
   const { preset } = theme;
+  const [currency, setCurrency] = useState('$');
 
   return (
     <div
@@ -214,7 +221,7 @@ const MenuItemCard = ({ item, theme, accentColor }: { item: MenuItem; theme: The
             className="text-md font-semibold transition-colors whitespace-nowrap"
            
           >
-            {formatCurrency(item.price)}
+            {formatCurrency(item.price, currency)}
           </p>
         </div>
 
@@ -256,6 +263,7 @@ export default function RestaurantMenu() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const supabase = createClientComponentClient<Database>();
   const containerRef = useRef<HTMLDivElement>(null);
+  
 
  
   useEffect(() => {

@@ -184,8 +184,6 @@ export default function OnboardingPage() {
   }, []);
 
 
-  // --- UPDATED: ANIMATION HOOK for footer spotlight ---
-  // --- UPDATED: ANIMATION HOOK for footer spotlight ---
   const footerRef = useRef<HTMLElement>(null);
   const footerContentRef = useRef<HTMLDivElement>(null); // Ref for the content
 

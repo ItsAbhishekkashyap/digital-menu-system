@@ -1,0 +1,23 @@
+STANDARD PERSONAL LICENSE AGREEMENT
+Product: RestroSaaS Kit (Standard Edition)
+Copyright (c) 2026 [Abhishek Gond/RestroSaaS]
+
+By purchasing and downloading this software, you agree to the following terms:
+
+1. GRANT OF LICENSE
+You are granted a non-exclusive, non-transferable license to use the source code for:
+   - Personal learning and educational purposes.
+   - Creating a personal portfolio project.
+   - Testing and local development.
+
+2. RESTRICTIONS (STRICTLY PROHIBITED)
+   - You CANNOT use this code to build a paid website for a client.
+   - You CANNOT resell, redistribute, or sub-license the source code.
+   - You CANNOT upload this source code to public repositories (GitHub, GitLab, etc.).
+   - You CANNOT include this code in any product you sell on marketplaces (Gumroad, CodeCanyon, ThemeForest).
+
+3. OWNERSHIP
+The intellectual property and copyright of the source code remain exclusively with the creator. You are purchasing a license to USE the code, not the ownership of the code itself.
+
+4. TERMINATION
+If you violate any of these terms, this license is automatically terminated, and you may face legal action for copyright infringement.

@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🥗 RestroSaaS - Digital Menu Kit
+**Launch your own Digital Menu Agency in minutes.**
 
-## Getting Started
+This is a complete SaaS solution built with **Next.js 15**, **Tailwind CSS**, **TypeScript** and **Supabase**.
 
-First, run the development server:
+## 📂 Features
+* **Menu Builder:** Drag-and-drop interface for restaurants.
+* **QR Code Ready:** Auto-generates unique links for each restaurant.
+* **Supabase Backend:** Zero-maintenance database.
+* **Responsive Design:** Looks perfect on all mobile devices.
 
+---
+
+## 🚀 Quick Start Guide
+
+### 1. Install Dependencies
+Open your terminal in this folder and run:
 ```bash
+npm install
+# or
+yarn install
+
+2. Set Up the Database (Supabase)
+This project uses Supabase (Free Tier is sufficient).
+
+  1. Go to Supabase.com and create a new project.
+
+  2. Go to the SQL Editor (on the left sidebar).
+
+  3. Open the file schema.sql provided in this folder.
+
+  4. Copy ALL the text and paste it into the Supabase SQL Editor.
+
+  5. Click Run.
+
+  This automatically creates your Tables, Policies, and Storage Buckets.
+
+3. Connect Environment Variables:
+
+  1. Rename the file .env.example to .env.local.
+
+  2. Go to your Supabase Dashboard -> Settings -> API.
+
+  3. Copy your Project URL and Anon Key.
+
+  4. Paste them into your .env.local file.
+
+4. Run the APP
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 to see your app!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+🛠️ Deployment (Go Live)
+We recommend Vercel for hosting (it's free and fast).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  1.Push this code to a Private GitHub repository.
 
-## Learn More
+  2.Go to Vercel.com -> Add New Project.
 
-To learn more about Next.js, take a look at the following resources:
+  3.Import your repository.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  4.Important: In Vercel "Environment Variables", add the same keys you  put in .env.local:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  NEXT_PUBLIC_SUPABASE_URL
 
-## Deploy on Vercel
+  NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  NEXT_PUBLIC_SITE_URL (Set this to your Vercel domain, e.g., https://my-menu-app.vercel.app)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+  5. Click Deploy.
+

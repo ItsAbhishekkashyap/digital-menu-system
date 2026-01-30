@@ -1,0 +1,23 @@
+COMMERCIAL AGENCY LICENSE AGREEMENT
+Product: RestroSaaS Kit (Agency Edition)
+Copyright (c) 2026 [Abhishek Gond/RestroSaaS]
+
+This license is designed for Freelancers, Agencies, and Developers.
+
+1. GRANT OF LICENSE (What you CAN do)
+   - You CAN use this source code to build and deploy websites for UNLIMITED clients (Restaurants, Cafes, Hotels).
+   - You CAN charge your clients any fee you desire for the final product/service.
+   - You CAN remove the "RestroSaaS" branding and replace it with your own Agency branding (Whitelabeling).
+   - You CAN modify the code to fit your client's specific requirements.
+
+2. RESTRICTIONS (What you CANNOT do)
+   - You CANNOT resell the "Source Code" or "Starter Kit" itself.
+     (Example: You cannot buy this kit for ₹8,000 and sell the zip file to another developer for ₹4,000).
+   - You CANNOT list this product on code marketplaces like CodeCanyon, Gumroad, or AppSumo.
+   - You are selling the "End Product" (The Menu Website) to business owners, NOT the "Tool" to other developers.
+
+3. LIABILITY
+The creator of RestroSaaS is not liable for any damages, bugs, or losses incurred during the deployment of this software for your clients. The software is provided "as is."
+
+4. INTELLECTUAL PROPERTY
+You may claim the "Final Website" as your work for your client, but the underlying SaaS architecture remains the intellectual property of the original creator.

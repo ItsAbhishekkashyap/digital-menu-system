@@ -8,8 +8,8 @@ import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Star, Menu as MenuIcon, X, ArrowUp } from 'lucide-react';
-import { cn } from '@/lib/utils'; // Assuming you have this utility file in your project
-import { Database } from '@/types/supabase'; // Assuming you have this types file
+import { cn } from '@/lib/utils'; 
+import { Database } from '@/types/supabase'; 
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,7 +25,6 @@ interface Restaurant {
   id: string; name: string; description: string | null; logo_url: string | null;
   theme: Theme; menu_sections: MenuSection[];
 }
-
 // --- CONSTANTS ---
 const DEFAULT_THEME: Theme = { preset: 'dark', brandColor: '#FBBF24' };
 

@@ -6,8 +6,10 @@ export const createSupabaseServerClient = async () => {
   const cookieStore = await cookies();
 
   return createServerComponentClient<Database>({
-    // 👇 FIX: 'Promise.resolve' laga diya.
-    // Library ko Promise chahiye tha, humne Promise de diya. Error Khatam.
-    cookies: () => Promise.resolve(cookieStore),
+    // 👇 ENGINEER FIX: 
+    // Runtime needs: 'cookieStore' (Object) -> We pass this.
+    // TypeScript wants: 'Promise' -> We cast it as a Promise to trick the compiler.
+    // We use 'typeof cookieStore' to match the exact type structure without 'any'.
+    cookies: () => cookieStore as unknown as Promise<typeof cookieStore>,
   });
-};
+}

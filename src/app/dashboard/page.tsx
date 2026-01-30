@@ -243,7 +243,7 @@ export default function DashboardPage() {
                             <div className="flex items-start gap-4 relative">
                                 <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-gray-800 flex items-center justify-center flex-shrink-0 border border-gray-700 overflow-hidden">
                                     {restaurant.logo_url ? (
-                                        <Image src={restaurant.logo_url} alt={`${restaurant.name} logo`} width={80} height={80} className="object-cover w-full h-full" />
+                                        <Image src={restaurant.logo_url} alt={`${restaurant.name} logo`} width={80} height={80} className="object-cover w-full h-full" unoptimized />
                                     ) : (
                                         <ImageIcon className="w-8 h-8 text-gray-600" />
                                     )}

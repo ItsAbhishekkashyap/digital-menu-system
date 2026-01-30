@@ -1,45 +1,37 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-
-   async redirects() {
+  async redirects() {
     return [
       {
-        source: '/', // The incoming request path
-        destination: '/onboarding', // The path to redirect to
-        permanent: true, // Use a permanent redirect (HTTP 308)
+        source: '/', 
+        destination: '/onboarding', 
+        permanent: true, 
       },
     ]
   },
 
-  
   images: {
-    domains: ['placehold.co', 'images.unsplash.com'], 
+    // 'domains' wala array hata diya (Deprecated tha)
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'qdlqmvwhyceraxndxuiy.supabase.co',
         port: '',
-        pathname: '/storage/v1/object/public/menu-item-images/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'qdlqmvwhyceraxndxuiy.supabase.co',
-        port: '',
-        pathname: '/storage/v1/object/public/restaurant-logos/**',
+        pathname: '/storage/v1/object/public/**', // ✅ FIXED: Ab ye saare buckets (logos, items, etc) ko allow karega
       },
       {
         protocol: 'https',
         hostname: 'placehold.co',
+        port: '',
+        pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
       },
-
-       // Add this line
-  
-      
     ],
   },
   transpilePackages: ['gsap', 'framer-motion']
